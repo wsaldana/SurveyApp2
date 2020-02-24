@@ -13,6 +13,14 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.view.View
+import android.widget.Toast
+import com.example.surveyapp.ui.gallery.GalleryFragment
+import com.example.surveyapp.ui.home.HomeFragment
+import com.example.surveyapp.ui.send.SendFragment
+import com.example.surveyapp.ui.share.ShareFragment
+import com.example.surveyapp.ui.slideshow.SlideshowFragment
+import com.example.surveyapp.ui.tools.ToolsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,8 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            agregar(view)
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -53,5 +60,54 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun iniciar(view: View){
+        val fragment = ShareFragment()
+        val home = HomeFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.hide(home)
+        transaction.commit()
+    }
+
+    fun pregunta2(view: View){
+        val home = ShareFragment()
+        val fragment = ToolsFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.hide(home)
+        transaction.commit()
+    }
+
+    fun pregunta3(view: View){
+        val home = ToolsFragment()
+        val fragment = GalleryFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.hide(home)
+        transaction.commit()
+    }
+
+    fun resultados(view: View){
+        val home = GalleryFragment()
+        val fragment = SlideshowFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.hide(home)
+        transaction.commit()
+    }
+
+    fun agregar(view: View){
+        val home = HomeFragment()
+        val fragment = SendFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.hide(home)
+        transaction.commit()
+    }
+
+    fun verResp(view: View){
+        Toast.makeText(this," ",Toast.LENGTH_SHORT).show()
     }
 }
